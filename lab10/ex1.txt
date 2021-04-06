@@ -1,0 +1,35 @@
+
+Exercise 1:
+
+READ COMMITED:
+  Both sessions show the same data.
+  While session 2 hasn't committed the transaction, the other transactions cannot see the changes.
+  After committing the transaction from session 2, we can see the updated username in session 1. 
+  The second session was blocked while the first one didn't commit yet. This is to prevent a lost update from the first session.
+
+REPEATABLE READ:
+  Both sessions show the same data. 
+  But when sessio 2 hasn't commited, the other session cannot see the changes.
+  After the commit from session 2, we still cannot see the updated username from the first session, because of "REPEATABLE READ"
+  The attempt to update the balance from session 1 results in an error "could not serialize access due to concurrent update".
+
+----------------------------------------------------------------------------------------------------------------------
+
+Exercise 2:
+
+READ COMMITED:
+  Since nothing was committed in the transaction 2, people in the group were not observed. So the balance was only updated for bob.
+  
+REPEATABLE READ:
+  Same.
+
+----------------------------------------------------------------------------------------------------------------------
+
+Exercise 3:
+
+REPEATABLE READ:
+  The balance of Mike got doubled. And no other updates were done. This is because REPEATABLE READ does not let the first transaction see bob's group change. 
+  So only Mike's account is visible for the first transaction.
+
+SERIALIZABLE:
+  Same.
